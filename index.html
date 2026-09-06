@@ -122,19 +122,27 @@
             color: #1e293b;
         }
 
-        .diagram-container {
+        .media-container {
             display: flex;
             justify-content: center;
             align-items: center;
             background: #ffffff;
             border: 1.5px solid #bbdefb;
             border-radius: 12px;
-            padding: 16px;
+            padding: 12px;
             margin-bottom: 16px;
-            box-shadow: inset 0 2px 6px rgba(0,0,0,0.03);
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
         }
 
-        .diagram-container svg {
+        .media-container img {
+            width: 100%;
+            max-height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .media-container svg {
             max-width: 100%;
             height: auto;
         }
@@ -265,10 +273,11 @@
     const quizData = [
         // ================= SECTION 1: ELECTROSTATICS & CAPACITANCE (1 - 10) =================
         {
-            question: "1. एक पक्षी आकर एक नंगी हाई-पावर बिजली लाइन पर बैठ जाता है। वह:",
+            question: "1. एक पक्षी आकर एक नंगी हाई-पावर बिजली लाइन पर बैठ जाता है (जैसा चित्र में दिखाया गया है)। वह:",
+            image: "https://images.unsplash.com/photo-1549608276-5786777e6587?auto=format&fit=crop&w=700&q=80",
             options: ["एक हल्के झटके का अनुभव करेगा", "एक मजबूत झटके का अनुभव करेगा", "तत्काल मारा जाएगा", "व्यावहारिक रूप से अप्रभावित रहेगा"],
             answer: 3,
-            explanation: "पक्षी के दोनों पंजे एक ही तार पर पास-पास होते हैं, जिससे उनके बीच कोई विभवांतर (ΔV = 0) उत्पन्न नहीं होता और सर्किट जमीन से पूरा नहीं होता।"
+            explanation: "पक्षी के दोनों पंजे एक ही तार पर पास-पास होते हैं, जिससे उनके बीच कोई विभवांतर (ΔV = 0) उत्पन्न नहीं होता और परिपथ जमीन के साथ पूरा नहीं होता।"
         },
         {
             question: "2. आवेश (Electric Charge) की न्यूनतम संभव (मूल) मात्रा है:",
@@ -337,34 +346,21 @@
             diagram: `
                 <svg width="420" height="180" viewBox="0 0 420 180">
                     <rect width="100%" height="100%" fill="#ffffff" rx="8"/>
-                    <!-- Central Node P -->
                     <circle cx="210" cy="90" r="9" fill="#0d47a1"/>
                     <text x="202" y="118" font-size="14" fill="#0d47a1" font-weight="bold">संधि (P)</text>
-
-                    <!-- Wire 1: Inward (4A) -->
                     <line x1="50" y1="30" x2="202" y2="86" stroke="#2e7d32" stroke-width="4"/>
-                    <!-- Large Inward Arrow -->
                     <polygon points="135,60 120,50 126,68" fill="#2e7d32"/>
                     <rect x="35" y="10" width="85" height="26" fill="#e8f5e9" rx="4" stroke="#2e7d32"/>
                     <text x="40" y="28" font-size="13" fill="#1b5e20" font-weight="bold">आ रही धारा: 4A</text>
-
-                    <!-- Wire 2: Inward (2A) -->
                     <line x1="50" y1="150" x2="202" y2="94" stroke="#2e7d32" stroke-width="4"/>
-                    <!-- Large Inward Arrow -->
                     <polygon points="135,120 126,112 120,130" fill="#2e7d32"/>
                     <rect x="35" y="145" width="85" height="26" fill="#e8f5e9" rx="4" stroke="#2e7d32"/>
                     <text x="40" y="163" font-size="13" fill="#1b5e20" font-weight="bold">आ रही धारा: 2A</text>
-
-                    <!-- Wire 3: Outward (1A) -->
                     <line x1="218" y1="86" x2="360" y2="30" stroke="#c62828" stroke-width="4"/>
-                    <!-- Large Outward Arrow -->
                     <polygon points="295,55 280,62 286,45" fill="#c62828"/>
                     <rect x="300" y="10" width="85" height="26" fill="#ffebee" rx="4" stroke="#c62828"/>
                     <text x="305" y="28" font-size="13" fill="#b71c1c" font-weight="bold">जा रही धारा: 1A</text>
-
-                    <!-- Wire 4: Outward (I = ?) -->
                     <line x1="218" y1="94" x2="360" y2="150" stroke="#0d47a1" stroke-width="4" stroke-dasharray="6,4"/>
-                    <!-- Large Outward Arrow -->
                     <polygon points="295,125 286,135 280,118" fill="#0d47a1"/>
                     <rect x="300" y="145" width="95" height="26" fill="#e3f2fd" rx="4" stroke="#0d47a1"/>
                     <text x="305" y="163" font-size="14" fill="#0d47a1" font-weight="bold">जा रही धारा: I = ?</text>
@@ -411,7 +407,6 @@
                 <svg width="320" height="130" viewBox="0 0 320 130">
                     <rect width="100%" height="100%" fill="#ffffff" rx="8"/>
                     <circle cx="160" cy="65" r="48" fill="none" stroke="#1565c0" stroke-width="4"/>
-                    <!-- Clear Direction Arrows -->
                     <polygon points="160,17 172,9 172,25" fill="#1565c0"/>
                     <polygon points="160,113 148,105 148,121" fill="#1565c0"/>
                     <text x="148" y="72" font-size="24" fill="#c62828" font-weight="bold">⊗</text>
@@ -536,7 +531,6 @@
                     <rect width="100%" height="100%" fill="#ffffff" rx="8"/>
                     <circle cx="140" cy="65" r="20" fill="#e53935"/>
                     <text x="133" y="72" font-size="18" fill="#fff" font-weight="bold">Q</text>
-                    <!-- Radiating Outward Arrows -->
                     <line x1="140" y1="45" x2="140" y2="12" stroke="#e53935" stroke-width="2.5"/>
                     <polygon points="140,8 134,18 146,18" fill="#e53935"/>
                     <line x1="140" y1="85" x2="140" y2="118" stroke="#e53935" stroke-width="2.5"/>
@@ -611,12 +605,17 @@
             `;
         });
 
-        let diagramHTML = q.diagram ? `<div class="diagram-container">${q.diagram}</div>` : "";
+        let mediaHTML = "";
+        if (q.image) {
+            mediaHTML = `<div class="media-container"><img src="${q.image}" alt="Physics Illustration" loading="lazy"></div>`;
+        } else if (q.diagram) {
+            mediaHTML = `<div class="media-container">${q.diagram}</div>`;
+        }
 
         qCard.innerHTML = `
             <div id="badge-${index}"></div>
             <div class="question-title">${q.question}</div>
-            ${diagramHTML}
+            ${mediaHTML}
             <ul class="options-list">${optionsHTML}</ul>
             <div class="explanation-box" id="exp-${index}">
                 <strong>🤖 AI Explanation:</strong> <br>
